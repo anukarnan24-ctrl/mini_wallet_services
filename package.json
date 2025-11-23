@@ -1,0 +1,26 @@
+{
+  "name": "mini_wallet_service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "seed:users": "node src/scripts/user-creation.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "bcrypt": "^6.0.0",
+    "express": "^5.1.0",
+    "express-basic-auth": "^1.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^6.19.0"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.3",
+    "nodemon": "^3.1.10"
+  }
+}
