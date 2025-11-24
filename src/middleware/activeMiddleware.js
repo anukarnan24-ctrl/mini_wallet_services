@@ -1,3 +1,4 @@
+//todo no need of this middleware you can delete this file and apply transactionMiddleware instead
 function checkActive(req, res, next) {
   const user = req.user;
 

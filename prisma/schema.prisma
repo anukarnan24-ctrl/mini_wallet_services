@@ -8,61 +8,62 @@ generator client {
 }
 
 model User {
-  id      String   @id @default(uuid())//id string @id@default
-  name    String
-  email   String   @unique 
-  password String
-  role     Role     @default(USER)     // <-- ADD THIS
-  wallet  Wallet?
-  settings Settings?
-  transactionEnabled   Boolean  @default(true)   
-} 
-enum  Role{
+  id                 String        @id @default(uuid()) //id string @id@default
+  name               String
+  email              String        @unique
+  password           String
+  role               Role          @default(USER) // <-- ADD THIS
+  wallet             Wallet?
+  settings           Settings?
+  transactionEnabled Boolean       @default(true)
+  transactions       Transaction[]
+}
+
+enum Role {
   ADMIN
   USER
 }
 
+//todo remove active we arleady have transactionEnabled field in user model 
 model Settings {
-  id         String   @id @default(uuid())
-  userId     String   @unique
+  id     String @id @default(uuid())
+  userId String @unique
   active     Boolean  @default(true)      
-  limit      Float    @default(200000) 
-  user       User     @relation(fields: [userId], references: [id])    
+  limit  Float  @default(200000)
+  user   User   @relation(fields: [userId], references: [id])
 }
 
-  model Wallet {
-    id          String        @id @default(uuid())
-    balance     Float         @default(0)
-    userId      String        @unique
-    version      Int      @default(1)   
-    currency    String
-    user        User          @relation(fields: [userId], references: [id])
-    transactions Transaction[]
-  }
-  
+model Wallet {
+  id           String        @id @default(uuid())
+  balance      Float         @default(0)
+  userId       String        @unique
+  version      Int           @default(1)
+  currency     String
+  user         User          @relation(fields: [userId], references: [id])
+  transactions Transaction[]
+}
 
+//todo add userId mapping
 model Transaction {
-  id          String   @id @default(uuid())
+  id          String            @id @default(uuid())
   walletId    String
   type        TransactionType
-  fees        Int      @default(0)
+  fees        Int               @default(0)
   amount      Float
-  status      TransactionStatus  @default(PENDING)
-  createdAt   DateTime @default(now())
+  status      TransactionStatus @default(PENDING)
+  createdAt   DateTime          @default(now())
   processedAt DateTime?
-  wallet      Wallet   @relation(fields: [walletId], references: [id])
+  wallet      Wallet            @relation(fields: [walletId], references: [id])
 }
 
-
-enum  TransactionStatus{
+enum TransactionStatus {
   INIT
   SUCCESS
   FAILED
   PENDING
 }
 
-
-enum TransactionType{
+enum TransactionType {
   CREDIT
   DEBIT
 }

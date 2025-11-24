@@ -2,7 +2,9 @@ const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+//todo store this value in env file and call that
 const JWT_SECRET = "secret_key";
+
 
 module.exports = async (req, res, next) => {
   try {

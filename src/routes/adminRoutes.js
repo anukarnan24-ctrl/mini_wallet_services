@@ -9,6 +9,7 @@ const adminOnly = require("../middleware/roleMiddleware");
 router.use(auth);
 router.use(adminOnly);
 //1.s
+//todo use transactionEnabled column to update user status
 router.patch('/users/:id/status',async(req,res)=>{
 try{
     const userId = req.params.id;

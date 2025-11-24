@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const prisma = new PrismaClient();
 const router = express.Router();
 
+//todo env value in here
 const JWT_SECRET = "secret_key";
 
 // REGISTER
